@@ -1,6 +1,4 @@
-# tsoha-projekti
-
-## Instagrammable Helsinki
+# Instagrammable Helsinki
 
 
 Sovellus on karttasovellus, joka näyttää Helsingin parhaimmat Instagram-kuvauslokaatiot. Sisäänkirjautumisen jälkeen
