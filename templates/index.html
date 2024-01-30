@@ -9,6 +9,19 @@ crossorigin=""></script>
 <div id="map" style="height: 500px;"></div>
 
 <script type = "module">
-    import {setUp} from "./static/map.js"
+    import {setUp, addPoint} from "./static/map.js"
     const map = setUp()
+    const button = document.querySelector('button')
+    button.addEventListener('click', addPoint)
 </script>
+
+<div id="form" style ="display: none">
+    <form>
+    <p>Kohteen nimi:</p>
+    <input type = "text" id="name"><br>
+    <p>Kohteen kuvaus:</p>
+    <input type = "text" id="description"><br>
+    <button>Lisää uusi kohde</button>
+    </form>
+    </div>
+

@@ -1,4 +1,7 @@
- function setUp () {
+var lat = 0
+var lng = 0
+
+function setUp () {
     const map = L.map('map').setView([60.1676, 24.94327], 13)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
@@ -22,11 +25,14 @@
                 window.location.href ='point/' + id
             })
         })
-        })
-
         map.on('click', function(e) {
-            const lat = e.latlng.lat
-            const lng = e.latlng.lng
+            lat = e.latlng.lat
+            lng = e.latlng.lng
+    
+            const form = document.getElementById("form")
+            if (form.style.display === "none") {
+                form.style.display = "block"
+            }
             
             const point = L.circle([lat, lng], {
                 color:'red',
@@ -34,25 +40,36 @@
                 fillOpacity: 0.5,
                 radius:30
             }).addTo(map)
-            
-            fetch('/create_point', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({latitude: lat, longitude: lng})
-            })
-            .then(response => response.json())
-            .then(data => {
-                const id = data.id
-                point.on('click', function() {
-                    window.location.href='point/' + id
-
-                })
-            })
-
+          })
         })
-        return map
-    }
+        .catch(error => console.error('Error:', error))
 
-export {setUp}
+        return map
+
+        }
+
+
+function addPoint () {
+    const title = document.getElementById("name").value
+    const description = document.getElementById("description").value
+
+    fetch('/create_point', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({latitude: lat, longitude: lng, title:title, description:description})
+    })
+    .then(response => response.json())
+    .then(data => {
+        const id = data.id
+        point.on('click', function() {
+            window.location.href='point/' + id
+        })
+    })
+    .catch(error => console.error('Error:', error))
+
+    
+}
+
+export {setUp, addPoint}
