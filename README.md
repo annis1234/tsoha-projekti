@@ -32,9 +32,11 @@ Sovellus käynnistetään komennolla
 flask run
 ```
 
-# VÄLIPALAUTUS 2.2.\
+# Välipalautus 4.2.
 
-Käyttäjä pystyy luomaan käyttäjätunnuksen ja kirjautumaan sisään sovellukseen. Sisäänkirjautumisen jälkeen käyttäjä näkee pohjakartan, jossa
-näkyy kaikki tietokantaan lisätyt pisteet. Käyttäjä voi lisätä pisteen kartalle klikkaamalla karttaa, jolloin kartan alapuolelle aukeaa lomake,
-johon syötetään kohteen nimi ja kuvaus. Kohde lisätään klikkaamalla painiketta "Lisää uusi kohde". Käyttäjä voi klikata kartalla näkyviä
-pisteitä, jolloin aukeaa kohteen tiedot näyttävä sivu.
+Käyttäjä pystyy luomaan käyttäjätunnuksen ja kirjautumaan sisään sovellukseen. Toistaiseksi kaikki käyttäjät ovat peruskäyttäjiä, joilla on
+samat käyttöoikeudet.
+
+Sisäänkirjautumisen jälkeen käyttäjä näkee pohjakartan, jossa näkyvät kaikki tietokantaan lisätyt pisteet. Käyttäjä voi lisätä pisteen kartalle
+klikkaamalla karttaa, jolloin kartan alapuolelle aukeaa lomake, johon syötetään kohteen nimi ja kuvaus. Kohde lisätään klikkaamalla painiketta
+"Lisää uusi kohde". Käyttäjä voi klikata kartalla näkyviä pisteitä, jolloin aukeaa kohteen tiedot näyttävä sivu.
