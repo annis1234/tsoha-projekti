@@ -21,7 +21,7 @@ Aktivoi virtuaaliympäristö ja asenna riippuvuudet:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r ./requirements
+pip install -r ./requirements.txt
 ```
 
 Sovellus käyttää PostgreSQL-tietokantaa. Tietokannan skeema määritetään komennolla:
