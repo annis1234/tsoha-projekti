@@ -9,8 +9,31 @@ tykkäyksistä ja kommenteista.
 
 Ylläpito-oikeudet omaava käyttäjä voi poistaa luotuja kohteita.
 
+# Käynnistysohjeet
 
-VÄLIPALAUTUS 2.2.
+Kloonaa repositorio koneellesi ja siirry sen juurihakemistoon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavasti:\
+DATABASE_URL=<tietokannan paikallinen osoite>
+SECRET_KEY=<salainen-avain>
+
+Aktivoi virtuaaliympäristö ja asenna riippuvuudet:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r ./requirements
+```
+
+Sovellus käyttää PostgreSQL-tietokantaa. Tietokannan skeema määritetään komennolla:
+```bash
+psql < schema.sql
+```
+
+Sovellus käynnistetään komennolla
+```bash
+flask run
+```
+
+# VÄLIPALAUTUS 2.2.\
+
 Käyttäjä pystyy luomaan käyttäjätunnuksen ja kirjautumaan sisään sovellukseen. Sisäänkirjautumisen jälkeen käyttäjä näkee pohjakartan, jossa
 näkyy kaikki tietokantaan lisätyt pisteet. Käyttäjä voi lisätä pisteen kartalle klikkaamalla karttaa, jolloin kartan alapuolelle aukeaa lomake,
 johon syötetään kohteen nimi ja kuvaus. Kohde lisätään klikkaamalla painiketta "Lisää uusi kohde". Käyttäjä voi klikata kartalla näkyviä
