@@ -12,8 +12,8 @@ Ylläpito-oikeudet omaava käyttäjä voi poistaa luotuja kohteita.
 # Käynnistysohjeet
 
 Kloonaa repositorio koneellesi ja siirry sen juurihakemistoon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavasti:\
-DATABASE_URL=<tietokannan paikallinen osoite>
-SECRET_KEY=<salainen-avain>
+DATABASE_URL=<"tietokannan paikallinen osoite">\
+SECRET_KEY=<"salainen-avain">
 
 Aktivoi virtuaaliympäristö ja asenna riippuvuudet:
 ```bash
