@@ -8,3 +8,10 @@ antaa tykkäyksiä ja kommentteja. Kohdetta klikkaamalla käyttäjälle avautuu 
 tykkäyksistä ja kommenteista.
 
 Ylläpito-oikeudet omaava käyttäjä voi poistaa luotuja kohteita.
+
+
+VÄLIPALAUTUS 2.2.
+Käyttäjä pystyy luomaan käyttäjätunnuksen ja kirjautumaan sisään sovellukseen. Sisäänkirjautumisen jälkeen käyttäjä näkee pohjakartan, jossa
+näkyy kaikki tietokantaan lisätyt pisteet. Käyttäjä voi lisätä pisteen kartalle klikkaamalla karttaa, jolloin kartan alapuolelle aukeaa lomake,
+johon syötetään kohteen nimi ja kuvaus. Kohde lisätään klikkaamalla painiketta "Lisää uusi kohde". Käyttäjä voi klikata kartalla näkyviä
+pisteitä, jolloin aukeaa kohteen tiedot näyttävä sivu.
