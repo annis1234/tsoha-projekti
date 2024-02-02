@@ -1,15 +1,65 @@
-from flask import Flask,render_template, request, jsonify, redirect
+from flask import Flask,render_template, request, jsonify, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from os import getenv
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
+app.secret_key=getenv("SECRET_KEY")
 db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/new_user")
+def new_user():
+    return render_template("new_user.html")
+
+@app.route("/create_user", methods=["POST"])
+def create():
+    try: 
+        username = request.form["username"]
+        password = request.form["password"]
+
+        hash_value = generate_password_hash(password)
+        sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")
+        db.session.execute(sql, {"username": username, "password": hash_value})
+        db.session.commit()
+        session["username"] = username
+        return redirect("/")
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form["username"]
+    password = request.form["password"]
+    sql = text("SELECT id, password FROM users WHERE username =:username")
+    result = db.session.execute(sql, {"username": username})
+    user = result.fetchone()
+
+    if not user:
+        return jsonify("username does not exist")
+    
+    else:
+        hash_value = user.password
+        if check_password_hash(hash_value, password):
+            session["username"] = username
+            return redirect("/")
+        else:
+            return jsonify("wrong username or password")
+        
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
+
+
+
 
 @app.route("/get_points", methods = ["GET"])
 def get():

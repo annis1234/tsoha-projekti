@@ -1,3 +1,7 @@
+{%if session.username%}
+<p>Olet kirjautunut nimellä {{session.username}}</p>
+<input type ='button' onClick="location.href='/logout';"value="Kirjaudu ulos">
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
 crossorigin=""/>
@@ -11,7 +15,7 @@ crossorigin=""></script>
 <script type = "module">
     import {setUp, addPoint} from "./static/map.js"
     const map = setUp()
-    const button = document.querySelector('button')
+    const button = document.getElementById('addButton')
     button.addEventListener('click', addPoint)
 </script>
 
@@ -21,7 +25,23 @@ crossorigin=""></script>
     <input type = "text" id="name"><br>
     <p>Kohteen kuvaus:</p>
     <input type = "text" id="description"><br>
-    <button>Lisää uusi kohde</button>
+    <button id = "addButton" >Lisää uusi kohde</button>
     </form>
     </div>
 
+
+{%else%}
+
+<h1>Kirjaudu sisään</h1>
+
+<form action="/login" method="POST">
+<p>Tunnus:<br>
+<input type ="text" name ="username"></p>
+<p>Salasana:</br>
+<input type="password" name="password"><br>
+<input type="submit" value="Kirjaudu">
+</form>
+<input type ="button" onClick="location.href='/new_user';" value= "Uusi käyttäjä">
+</body>
+</html>
+{%endif%}
