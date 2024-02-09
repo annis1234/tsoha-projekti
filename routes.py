@@ -15,7 +15,8 @@ def get_points():
 @app.route("/point/<int:id>")
 def point(id):
     point = points.get_one(id)
-    return render_template("point.html", id = id, point=point)
+    msg = messages.get_messages()
+    return render_template("point.html", id = id, point=point, msg=msg)
 
 @app.route("/create_point", methods=["POST"])
 def add():
@@ -57,7 +58,10 @@ def logout():
 @app.route("/send_message", methods=["POST"])
 def send_message():
     message = request.form['message']
+    id = points.get_point_id()
+    point = points.get_one(id)
+    msg = messages.get_messages()
     if messages.send_message(message):
-        return jsonify(message)
+        return render_template("point.html", id = id, point=point, msg=msg)
 
         

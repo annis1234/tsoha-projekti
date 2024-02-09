@@ -1,8 +1,15 @@
-PISTE {{id}}
-<br>
-{{point}}
+{%for p in point%}
 
-#Kommentit
+<h1>{{p.title}}</h1><br>
+{{p.description}}
+
+{%endfor%}
+<h2>Kommentit</h2>
+<hr>
+{% for message in msg %}
+{{message.content}}
+<hr>
+{%endfor%}
 
 <form action="/send_message" method="POST">
     <p>Kirjoita kommentti:</p>
