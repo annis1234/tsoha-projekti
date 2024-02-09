@@ -1,5 +1,5 @@
 from app import app
-import points, users
+import points, users, messages
 from flask import jsonify, render_template, request, redirect
 
 @app.route("/")
@@ -53,5 +53,11 @@ def login():
 def logout():
     users.logout()
     return redirect("/")
+
+@app.route("/send_message", methods=["POST"])
+def send_message():
+    message = request.form['message']
+    if messages.send_message(message):
+        return jsonify(message)
 
         

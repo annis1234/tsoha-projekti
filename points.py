@@ -1,5 +1,5 @@
 from db import db
-from flask import request
+from flask import request, session
 from sqlalchemy.sql import text
 
 
@@ -11,6 +11,7 @@ def get_all():
 def get_one(id):
     sql = text("SELECT latitude, longitude, title, description FROM points WHERE id=:id")
     result = db.session.execute(sql, {"id":id})
+    session["point_id"] = id
     return result.fetchall()
 
 def create_point():
@@ -26,3 +27,6 @@ def create_point():
     db.session.commit()
 
     return result.fetchone()[0]
+
+def get_point_id():
+    return session.get("point_id", 0)
