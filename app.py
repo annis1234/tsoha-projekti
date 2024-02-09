@@ -59,8 +59,6 @@ def logout():
     return redirect("/")
 
 
-
-
 @app.route("/get_points", methods = ["GET"])
 def get():
     sql = text("SELECT id, latitude, longitude, title FROM points")
@@ -96,3 +94,12 @@ def point(id):
     result = db.session.execute(sql, {"id":id})
     point = result.fetchall()
     return render_template("point.html", id = id, point=point)
+
+@app.route("/send_message", methods=["POST"])
+def send_message():
+    user_id = session.get("user_id", 0)
+    content = request.form['message']
+    print(content)
+    sql = text("INSERT INTO messages (content, user_id, point_id, sent_at) VALUES (:content, :user_id, :point_id, NOW())")
+
+    db.session.execute(sql, {"content": content, "user_id": user_id})
