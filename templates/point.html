@@ -1,7 +1,29 @@
 {%for p in point%}
 
 <h1>{{p.title}}</h1>
+
+<button id="delete">Poista kohde</button>
+
+<script type = "module">
+
+    function delete_point () {
+        fetch("/delete_point", {
+        method:"DELETE"
+    })
+    .then(response => 
+        window.location.href = "/")
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    const button = document.getElementById('delete')
+    button.addEventListener("click", delete_point)
+
+</script>
 <br>
+<br>
+
 {{p.description}}
 
 {%endfor%}
@@ -11,7 +33,6 @@
 {{message.content}}
 <hr>
 {%endfor%}
-
 {{new}}
 
 <form action="/send_message" method="POST">

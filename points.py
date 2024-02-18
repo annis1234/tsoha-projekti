@@ -34,4 +34,5 @@ def get_point_id():
 def delete_point(id):
     sql = text("DELETE FROM Points WHERE id=:id")
     db.session.execute(sql, {"id":id})
+    db.session.commit()
     

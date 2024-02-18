@@ -73,6 +73,7 @@ def delete_point():
     id = points.get_point_id()
     try:
         points.delete_point(id)
-        return jsonify({"point {id} deleted"})
+        return jsonify({"message": "point deleted"})
     except Exception as e:
         return {"message":  str(e)}
+        
