@@ -1,5 +1,5 @@
 from app import app
-import points, users, messages, likes
+import points, users, messages, likes, images
 from flask import jsonify, render_template, request, redirect
 
 @app.route("/")
@@ -20,6 +20,16 @@ def point(id):
 
     return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count)
 
+@app.route("/get_image/<int:id>")
+def get_image(id):
+    try:
+        img =images.get_image(id)
+
+        return img
+
+    except Exception as e:
+        return {"message":  str(e)}
+
 @app.route("/create_point", methods=["POST"])
 def add():
     try:
@@ -27,6 +37,7 @@ def add():
         return jsonify({"id": point_id})
     except Exception as e:
         return render_template("error.html", message=e)
+    
 
 @app.route("/new_user")
 def new_user():
@@ -70,8 +81,8 @@ def send_message():
     
 @app.route("/delete_point", methods=["DELETE"])
 def delete_point():
-    id = points.get_point_id()
     try:
+        id = points.get_point_id()
         points.delete_point(id)
         return jsonify({"message": "point deleted"})
     except Exception as e:
@@ -83,6 +94,25 @@ def like():
     try:
         likes.like()
         return redirect("/point/{}".format(id))
+    except Exception as e:
+        return {"message": str(e)}
+    
+
+@app.route("/send", methods=["POST"])
+def send():
+    try:
+        id = points.get_point_id()
+        file = request.files["file"]
+        name = file.filename
+        if not name.endswith(".jpg"):
+            return "Invalid filename"
+        data = file.read()
+        if len(data) > 1000*1200:
+            return "Too big file"
+        else:
+            images.send_image(name, data, id)
+            return redirect("/point/{}".format(id))
+        
     except Exception as e:
         return {"message": str(e)}
 

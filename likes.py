@@ -11,16 +11,14 @@ def get_likes():
 
     if result is None:
         likes = 0
-    
     else:
         likes = result[0]
-
     return likes
 
 def like():
     point_id = points.get_point_id()
     sql = text("SELECT count FROM likes WHERE point_id=:point_id")
-
+ 
     likes = db.session.execute(sql, {"point_id": point_id})
 
     result = likes.fetchall()

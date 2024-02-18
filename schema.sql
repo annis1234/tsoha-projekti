@@ -24,3 +24,10 @@ CREATE TABLE likes(
     point_id INTEGER REFERENCES points ON DELETE CASCADE
 
 );
+
+CREATE TABLE images(
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    data BYTEA,
+    point_id INTEGER REFERENCES points ON DELETE CASCADE
+);

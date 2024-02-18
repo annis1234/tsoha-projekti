@@ -2,6 +2,15 @@
 
 <h1>{{p.title}}</h1>
 
+<img src="/get_image/{{id}}" alt="img" style="width: 500px; height: auto;"/>
+
+
+<form action="/send" method="POST" enctype="multipart/form-data">
+    File: <input type="file" name="file">
+    <input type="submit" value="Lähetä kuva">
+</form>
+    
+
 <button id="delete">Poista kohde</button>
 
 <script type = "module">
@@ -26,10 +35,11 @@
 
 {{p.description}}
 <br>
-Tykkäykset: {{like_count}}
+<br>
 
 <form action="/like" method="POST">
-    <input type="submit" value="tykkää">
+    Tykkäykset: {{like_count}}
+    <input type="submit" value="Tykkää">
 </form>
 
 {%endfor%}
@@ -44,5 +54,7 @@ Tykkäykset: {{like_count}}
 <form action="/send_message" method="POST">
     <p>Kirjoita kommentti:</p>
     <textarea name="message"></textarea>
+    <br>
+    <br>
     <input type="submit" value="lähetä">
 </form>
