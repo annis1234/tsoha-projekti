@@ -1,5 +1,5 @@
 from app import app
-import points, users, messages
+import points, users, messages, likes
 from flask import jsonify, render_template, request, redirect
 
 @app.route("/")
@@ -16,7 +16,9 @@ def get_points():
 def point(id):
     point = points.get_one(id)
     msg = messages.get_messages()
-    return render_template("point.html", id = id, point=point, msg=msg)
+    like_count=likes.get_likes()
+
+    return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count)
 
 @app.route("/create_point", methods=["POST"])
 def add():
@@ -25,7 +27,7 @@ def add():
         return jsonify({"id": point_id})
     except Exception as e:
         return render_template("error.html", message=e)
-    
+
 @app.route("/new_user")
 def new_user():
     return render_template("new_user.html")
@@ -60,10 +62,8 @@ def send_message():
     try:
         message = request.form['message']
         id = points.get_point_id()
-        point = points.get_one(id)
-        msg = messages.get_messages()
         if messages.send_message(message):
-            return render_template("point.html", id = id, point=point, msg=msg, new=message)
+            return redirect("/point/{}".format(id))
         
     except Exception as e:
         return {"message": str(e)}
@@ -76,4 +76,14 @@ def delete_point():
         return jsonify({"message": "point deleted"})
     except Exception as e:
         return {"message":  str(e)}
+    
+@app.route("/like", methods = {"POST"})
+def like():
+    id = points.get_point_id()
+    try:
+        likes.like()
+        return redirect("/point/{}".format(id))
+    except Exception as e:
+        return {"message": str(e)}
+
         

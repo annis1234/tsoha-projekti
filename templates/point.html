@@ -17,14 +17,20 @@
         })
     }
 
-    const button = document.getElementById('delete')
-    button.addEventListener("click", delete_point)
+    const delete_button = document.getElementById('delete')
+    delete_button.addEventListener("click", delete_point)
 
 </script>
 <br>
 <br>
 
 {{p.description}}
+<br>
+Tykkäykset: {{like_count}}
+
+<form action="/like" method="POST">
+    <input type="submit" value="tykkää">
+</form>
 
 {%endfor%}
 <h2>Kommentit</h2>
