@@ -9,9 +9,28 @@ tykkäyksistä ja kommenteista.
 
 Ylläpito-oikeudet omaava käyttäjä voi poistaa luotuja kohteita.
 
+# Välipalautus 18.2.
+
+Sovellukseen lisätty tykkäys- ja kommentointimahdollisuus kohteille. Kohteita voi nyt myös poistaa. Lisätty myös mahdollisuus
+lisätä kohteesta kuva kohdesivulle.
+
+Toistaiseksi kaikilla käyttäjillä on samat oikeudet. Viimeistelyvaiheessa on tarkoitus lisätä käyttäjille peruskäyttäjän
+ja ylläpitäjän käyttöoikeudet, ja parannella virheidenkäsittelyä sekä sovelluksen ulkoasua.
+
+# Välipalautus 4.2.
+
+Käyttäjä pystyy luomaan käyttäjätunnuksen ja kirjautumaan sisään sovellukseen. Toistaiseksi kaikki käyttäjät ovat peruskäyttäjiä,
+joilla on samat käyttöoikeudet.
+
+Sisäänkirjautumisen jälkeen käyttäjä näkee pohjakartan, jossa näkyvät kaikki tietokantaan lisätyt pisteet. Käyttäjä voi lisätä
+kohteen klikkaamalla karttaa, jolloin kartan alapuolelle aukeaa lomake, johon syötetään kohteen nimi ja kuvaus. Kohde lisätään
+klikkaamalla painiketta "Lisää uusi kohde". Käyttäjä voi klikata kartalla näkyviä pisteitä, jolloin aukeaa kohteen tiedot näyttävä
+sivu.
+
 # Käynnistysohjeet
 
 Kloonaa repositorio koneellesi ja siirry sen juurihakemistoon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavasti:
+
 ```bash
 DATABASE_URL=<'tietokannan-paikallinen-osoite'>
 SECRET_KEY=<'salainen-avain'>
@@ -33,12 +52,3 @@ Sovellus käynnistetään komennolla
 ```bash
 flask run
 ```
-
-# Välipalautus 4.2.
-
-Käyttäjä pystyy luomaan käyttäjätunnuksen ja kirjautumaan sisään sovellukseen. Toistaiseksi kaikki käyttäjät ovat peruskäyttäjiä, joilla on
-samat käyttöoikeudet.
-
-Sisäänkirjautumisen jälkeen käyttäjä näkee pohjakartan, jossa näkyvät kaikki tietokantaan lisätyt pisteet. Käyttäjä voi lisätä pisteen kartalle
-klikkaamalla karttaa, jolloin kartan alapuolelle aukeaa lomake, johon syötetään kohteen nimi ja kuvaus. Kohde lisätään klikkaamalla painiketta
-"Lisää uusi kohde". Käyttäjä voi klikata kartalla näkyviä pisteitä, jolloin aukeaa kohteen tiedot näyttävä sivu.
