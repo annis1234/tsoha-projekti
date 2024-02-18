@@ -24,7 +24,7 @@ def add():
         point_id = points.create_point()
         return jsonify({"id": point_id})
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return render_template("error.html", message=e)
     
 @app.route("/new_user")
 def new_user():
@@ -38,8 +38,7 @@ def create_user():
         if users.create_user(username, password):
             return redirect("/")
         else:
-            return jsonify("error")
-
+            return render_template("error.html", message="Käyttäjätunnuksen luonti epäonnistui")
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -48,7 +47,7 @@ def login():
     if users.login(username, password):
         return redirect("/")
     else:
-        return jsonify("wrong username or password")
+        return render_template("error.html", message="väärä käyttäjätunnus tai salasana")
     
 @app.route("/logout")
 def logout():
@@ -57,11 +56,23 @@ def logout():
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
-    message = request.form['message']
-    id = points.get_point_id()
-    point = points.get_one(id)
-    msg = messages.get_messages()
-    if messages.send_message(message):
-        return render_template("point.html", id = id, point=point, msg=msg)
 
+    try:
+        message = request.form['message']
+        id = points.get_point_id()
+        point = points.get_one(id)
+        msg = messages.get_messages()
+        if messages.send_message(message):
+            return render_template("point.html", id = id, point=point, msg=msg, new=message)
         
+    except Exception as e:
+        return {"message": str(e)}
+    
+@app.route("/delete_point", methods=["DELETE"])
+def delete_point():
+    id = points.get_point_id()
+    try:
+        points.delete_point(id)
+        return jsonify({"point {id} deleted"})
+    except Exception as e:
+        return {"message":  str(e)}

@@ -1,6 +1,7 @@
 {%for p in point%}
 
-<h1>{{p.title}}</h1><br>
+<h1>{{p.title}}</h1>
+<br>
 {{p.description}}
 
 {%endfor%}
@@ -11,8 +12,10 @@
 <hr>
 {%endfor%}
 
+{{new}}
+
 <form action="/send_message" method="POST">
     <p>Kirjoita kommentti:</p>
-    <input type="text" name="message">
+    <textarea name="message"></textarea>
     <input type="submit" value="lähetä">
 </form>

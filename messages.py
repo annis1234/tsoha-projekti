@@ -3,7 +3,6 @@ from flask import request, session
 from sqlalchemy.sql import text
 import users, points
 
-
 def get_messages():
     point_id = points.get_point_id()
     sql = text("SELECT content FROM messages WHERE point_id=:point_id")
@@ -15,7 +14,7 @@ def send_message(message):
     point_id = points.get_point_id()
     content = message
     sql = text("INSERT INTO messages (content, user_id, point_id, sent_at) VALUES (:content, :user_id, :point_id, NOW())")
-    db.session.execute(sql, {"content": content, "user_id": user_id, "point_id" : point_id})
+    result = db.session.execute(sql, {"content": content, "user_id": user_id, "point_id" : point_id})
     db.session.commit()
-    return True
+    return result
 

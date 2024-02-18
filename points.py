@@ -1,5 +1,5 @@
 from db import db
-from flask import request, session
+from flask import request, session, jsonify
 from sqlalchemy.sql import text
 
 
@@ -30,3 +30,8 @@ def create_point():
 
 def get_point_id():
     return session.get("point_id", 0)
+
+def delete_point(id):
+    sql = text("DELETE FROM Points WHERE id=:id")
+    db.session.execute(sql, {"id":id})
+    
