@@ -16,6 +16,7 @@ def get_likes():
     return likes
 
 def like():
+    user_id = users.get_user()
     point_id = points.get_point_id()
     sql = text("SELECT count FROM likes WHERE point_id=:point_id")
  
@@ -24,11 +25,11 @@ def like():
     result = likes.fetchall()
 
     if not result:
-        sql = text("INSERT INTO likes (point_id, count) VALUES (:point_id, :count)")
-        db.session.execute(sql, {"point_id": point_id, "count": 1})
+        sql = text("INSERT INTO likes (point_id, count) VALUES (:point_id, :count, :user_id)")
+        db.session.execute(sql, {"point_id": point_id, "count": 1, "user_id": user_id})
         db.session.commit()
 
     else:
-        sql = text("UPDATE likes SET count = count+1 WHERE point_id=:point_id")
+        sql = text("UPDATE likes SET count = count+1 WHERE point_id=:point_id AND user_id=:user_id")
         db.session.execute(sql, {"point_id": point_id})
         db.session.commit()

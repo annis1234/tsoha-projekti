@@ -95,7 +95,7 @@ def like():
         likes.like()
         return redirect("/point/{}".format(id))
     except Exception as e:
-        return {"message": str(e)}
+        return redirect("/point/{}".format(id))
     
 
 @app.route("/send", methods=["POST"])
