@@ -60,7 +60,7 @@ def login():
     if users.login(username, password):
         return redirect("/")
     else:
-        return render_template("error.html", message="väärä käyttäjätunnus tai salasana")
+        return render_template("login.html", message="Väärä käyttäjätunnus tai salasana!")
     
 @app.route("/logout")
 def logout():

@@ -29,7 +29,7 @@ function setUp () {
             lat = e.latlng.lat
             lng = e.latlng.lng
     
-            const form = document.getElementById("form")
+            const form = document.getElementById("pointForm")
             if (form.style.display === "none") {
                 form.style.display = "block"
             }

@@ -1,15 +1,69 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="../static/assets/point.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container">
+    <nav class="navbar navbar-expand-sm navbar-light">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Takaisin</a>
+        </li>
+      </ul>
+    </nav>
+  
+
+
 {%for p in point%}
 
-<h1>{{p.title}}</h1> 
+<img src="/static/hearts.png" style="width: auto; height: 150px;" id="hearts">
+<div class="header">
+    <h1>{{p.title}}</h1>
+</div>
 
-<img src="/get_image/{{id}}" alt="img" style="width: 500px; height: auto;"/>
+<img src="/get_image/{{id}}" alt="img" style="width: 500px; height: auto; display: none;" onload="this.style.display='block'">
 
-
-<form action="/send" method="POST" enctype="multipart/form-data">
-    File: <input type="file" name="file">
-    <input type="submit" value="Lähetä kuva">
+<form action="/send" name="imgForm" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" name="sendPic" value="Lähetä kuva">
 </form>
     
+<br>
+<br>
+
+{{p.description}}
+<br>
+<br>
+
+<form action="/like" name="likeForm" method="POST">
+    Tykkäykset: {{like_count}}
+    <br>
+    <input type="submit" name="like" value="Tykkää">
+</form>
+
+{%endfor%}
+
+<div class="header">
+<h2>Kommentit</h2>
+</div>
+<hr>
+{% for message in msg %}
+{{message.content}}
+<hr>
+{%endfor%}
+{{new}}
+
+<form action="/send_message" method="POST">
+    <p>Kirjoita kommentti:</p>
+    <textarea name="message"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="Lähetä">
+</form>
+
+<button id="delete">Poista kohde</button>
 
 <script type = "module">
 
@@ -28,33 +82,3 @@
     delete_button.addEventListener("click", delete_point)
 
 </script>
-<br>
-<br>
-
-{{p.description}}
-<br>
-<br>
-
-<form action="/like" method="POST">
-    Tykkäykset: {{like_count}}
-    <input type="submit" value="Tykkää">
-</form>
-
-{%endfor%}
-<h2>Kommentit</h2>
-<hr>
-{% for message in msg %}
-{{message.content}}
-<hr>
-{%endfor%}
-{{new}}
-
-<form action="/send_message" method="POST">
-    <p>Kirjoita kommentti:</p>
-    <textarea name="message"></textarea>
-    <br>
-    <br>
-    <input type="submit" value="Lähetä">
-</form>
-
-<button id="delete">Poista kohde</button>

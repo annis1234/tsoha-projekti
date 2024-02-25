@@ -1,0 +1,53 @@
+body {
+
+    margin: auto;
+    max-width: 45em;
+    font-family: 'Didot', sans-serif;
+    background: rgb(248, 248, 253);
+    
+}
+
+.header {
+    font-size: 1em;
+    border-radius: .10em;
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+.navbar-item {
+    float: 'right';
+    font-size: 15px;
+}
+
+
+form input{
+    border: None;
+    background: transparent;
+    border-radius: .5em;
+    max-width: 15em;
+    display:inline;
+    grid-row-gap: .3em;
+    margin-bottom: 2em;
+    padding: 10px;
+
+}
+
+form input:hover{
+    opacity:0.5
+}
+
+button[id="delete"]{
+    border: none;
+    background: transparent;
+    opacity: 0.8;
+    border-radius: .5em;
+    padding: 5px;
+}
+
+button[id="delete"]:hover {
+    opacity:0.2;
+}
+
+#hearts{
+    float:right
+}
