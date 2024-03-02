@@ -1,5 +1,5 @@
 from db import db
-from flask import request, session, jsonify
+from flask import request, session
 from sqlalchemy.sql import text
 
 
@@ -35,4 +35,23 @@ def delete_point(id):
     sql = text("DELETE FROM Points WHERE id=:id")
     db.session.execute(sql, {"id":id})
     db.session.commit()
+
+def get_count():
+    sql = text("SELECT COUNT(*) from POINTS")
+
+    result = db.session.execute(sql)
+
+    return result.fetchone()[0]
+
+def get_most_popular():
+    sql = text("SELECT points.id, title, latitude, longitude, COUNT(points.id) FROM points \
+               LEFT JOIN likes ON points.id = likes.point_id GROUP BY points.id ORDER BY COUNT(points.id) DESC LIMIT 5")
+
+    result = db.session.execute(sql)
     
+    return result.fetchall()
+
+def get_coordinates(id):
+    sql = text ("SELECT latitude, longitude FROM points WHERE id =:id")
+    result = db.session.execute(sql, {"id": id})
+    return result.fetchall()

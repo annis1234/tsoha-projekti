@@ -4,7 +4,10 @@ from flask import jsonify, render_template, request, redirect
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    count = points.get_count()
+    best = points.get_most_popular()
+    print(best)
+    return render_template("index.html", count=count, best=best)
 
 @app.route("/get_points", methods = ["GET"])
 def get_points():
@@ -19,6 +22,7 @@ def point(id):
     like_count=likes.get_likes()
 
     return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count)
+
 
 @app.route("/get_image/<int:id>")
 def get_image(id):
@@ -91,10 +95,13 @@ def delete_point():
 @app.route("/like", methods = {"POST"})
 def like():
     id = points.get_point_id()
+    l = likes.get_likes()
     try:
         likes.like()
+        print(l)
         return redirect("/point/{}".format(id))
     except Exception as e:
+        print(e)
         return redirect("/point/{}".format(id))
     
 

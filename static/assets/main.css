@@ -20,7 +20,6 @@ body {
     font-size: 15px;
 }
 
-
 #loginForm {
     background: rgb(194, 194, 196);
     border-radius: .5em;
@@ -61,21 +60,13 @@ body {
 }
 
 #pointForm {
-    background: transparent;
-    border-radius: .5em;
-    max-width: 15em;
-    display:inline;
-    grid-row-gap: .3em;
-    margin-bottom: 2em;
-    padding: 10px 20px;
-    
+    padding: 10px;
 }
 
 #pointForm input[name='name'] {
     opacity: 0.8;
     border-radius: .5em;
     background:transparent
-
 
 }
 
@@ -95,7 +86,6 @@ body {
     opacity:0.2;
 }
 
-
 #pointForm textarea[name="message"]{
 
     opacity: 0.8;
@@ -109,4 +99,26 @@ body {
 
 #hearts{
     float:right
+}
+
+#stats {
+    padding: 10px;
+}
+
+#best {
+    padding: 5px;
+}
+
+#point {
+    color: black;
+    border-radius: .5em;
+    padding: 5px;
+
+}
+
+#point:hover{
+
+    opacity: 0.2;
+    text-decoration: none
+
 }

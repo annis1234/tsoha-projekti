@@ -22,11 +22,9 @@
 
 </div>
 
-
 <div class="header">
     <h2>Instagrammable Helsinki</h2>
 </div>
-
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -37,30 +35,47 @@ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
 
 
-<div class='row-6'>
 <div id="map" style="height: 500px;"></div>
-</div>
 
 <script type = "module">
-    import {setUp, addPoint} from "./static/map.js"
+    import {setUp, addPoint, zoomTo} from "./static/map.js"
     const map = setUp()
     const button = document.getElementById('addButton')
     button.addEventListener('click', addPoint)
 
+    window.zoomTo = zoomTo
+
 </script>
 
-
-<div id="pointForm" class='form' style ="display: none">
-    <form>
-    <p>Kohteen nimi:</p>
-    <input type = "text" name="name" id="name"><br>
-    <br>
-    <p>Kohteen kuvaus:</p>
-    <textarea name="message" id="description"></textarea>
-    <br>
-    <br>
-    <button id = "addButton" >Lisää uusi kohde</button>
-    </form>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="pointForm" class='form' style="display: none;">
+        <form>
+          <p>Kohteen nimi:</p>
+          <input type="text" name="name" id="name"><br>
+          <br>
+          <p>Kohteen kuvaus:</p>
+          <textarea name="message" id="description"></textarea>
+          <br>
+          <br>
+          <button id="addButton">Lisää uusi kohde</button>
+        </form>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div id="stats">
+      Kohteita sovelluksessa: {{count}}
+      <p>
+      Suosituimmat kohteet:
+        {% for b in best%}
+          <div id = "best">
+              <a id = "point" href="/point/{{b.id}}">{{b.title}}</a>
+              <button id ="zoom" onClick="zoomTo('{{b.latitude}}', '{{b.longitude}}')">Näytä kartalla</button>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
 </div>
 
 {%else%}
@@ -84,7 +99,6 @@ crossorigin=""></script>
     </form>
 </div>
 </div>
-
 
 <div class='col-6'>
 

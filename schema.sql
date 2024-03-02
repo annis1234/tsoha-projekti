@@ -23,7 +23,8 @@ CREATE TABLE likes(
     id SERIAL PRIMARY KEY,
     count INTEGER,
     point_id INTEGER REFERENCES points ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users UNIQUE
+    user_id INTEGER REFERENCES users,
+    UNIQUE(point_id, user_id)
 
 );
 
