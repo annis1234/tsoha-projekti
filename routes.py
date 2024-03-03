@@ -65,7 +65,7 @@ def login():
     if users.login(username, password):
         return redirect("/")
     else:
-        error = "virheellinen käyttäjätunnus tai salasana"
+        error = "Virheellinen käyttäjätunnus tai salasana"
         return redirect(url_for("index", error = error))
      
 @app.route("/logout")
