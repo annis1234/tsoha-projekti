@@ -1,6 +1,6 @@
 from app import app
 import points, users, messages, likes, images
-from flask import jsonify, render_template, request, redirect, url_for
+from flask import jsonify, render_template, request, redirect, url_for, session, abort
 
 @app.route("/")
 def index():
@@ -76,6 +76,10 @@ def send_message():
 
     try:
         message = request.form['message']
+
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        
         id = points.get_point_id()
         if messages.send_message(message):
             return redirect("/point/{}".format(id))

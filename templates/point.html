@@ -48,12 +48,16 @@
 <div class="header">
 <h2>Kommentit</h2>
 </div>
+<div id="messages">
 <hr>
-{% for message in msg %}
-{{message.content}}
+    {% for message in msg %}
+    {{message.content}}
+    <p><i>{{message.username}}</i>
+    <p>Lähetetty {{message.sent_at.strftime("%Y-%m-%d %H:%M:%S")}}
 <hr>
 {%endfor%}
 {{new}}
+</div>
 
 <form action="/send_message" method="POST">
     <p>Kirjoita kommentti:</p>
@@ -61,6 +65,7 @@
     <br>
     <br>
     <input type="submit" value="Lähetä">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 <button id="delete">Poista kohde</button>

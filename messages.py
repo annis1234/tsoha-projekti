@@ -5,7 +5,7 @@ import users, points
 
 def get_messages():
     point_id = points.get_point_id()
-    sql = text("SELECT content FROM messages WHERE point_id=:point_id")
+    sql = text("SELECT content, sent_at, username FROM messages LEFT JOIN users ON messages.user_id = users.id WHERE point_id=:point_id")
     result = db.session.execute(sql,{"point_id": point_id})
     return result.fetchall()
 
