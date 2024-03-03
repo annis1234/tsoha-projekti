@@ -1,6 +1,6 @@
 from app import app
 import points, users, messages, likes, images
-from flask import jsonify, render_template, request, redirect
+from flask import jsonify, render_template, request, redirect, url_for
 
 @app.route("/")
 def index():
@@ -23,12 +23,10 @@ def point(id):
 
     return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count)
 
-
 @app.route("/get_image/<int:id>")
 def get_image(id):
     try:
         img =images.get_image(id)
-
         return img
 
     except Exception as e:
@@ -42,7 +40,6 @@ def add():
     except Exception as e:
         return render_template("error.html", message=e)
     
-
 @app.route("/new_user")
 def new_user():
     return render_template("new_user.html")
@@ -55,7 +52,9 @@ def create_user():
         if users.create_user(username, password):
             return redirect("/")
         else:
-            return render_template("error.html", message="Käyttäjätunnuksen luonti epäonnistui")
+            error = "Käyttäjätunnuksen luonti epäonnistui"
+            return redirect(url_for("new_user", error =error))
+            
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -64,8 +63,9 @@ def login():
     if users.login(username, password):
         return redirect("/")
     else:
-        return render_template("login.html", message="Väärä käyttäjätunnus tai salasana!")
-    
+        error = "virheellinen käyttäjätunnus tai salasana"
+        return redirect(url_for("index", error = error))
+     
 @app.route("/logout")
 def logout():
     users.logout()

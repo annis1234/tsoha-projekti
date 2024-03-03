@@ -88,16 +88,23 @@ crossorigin=""></script>
     <h2>Kirjaudu sisään</h2>
 </div>
 
-
 <div id="loginForm" class='form'>
     <form action="/login" method="POST">
-    <p>Tunnus:<br>
-    <input type ="text" name ="username"></p>
-    <p>Salasana:</br>
+    Tunnus:<br>
+    <input type ="text" name ="username">
+    Salasana:<br>
     <input type="password" name="password"><br>
     <input type="submit" value="Kirjaudu">
     </form>
 </div>
+
+{%if request.args.get('error')%}
+
+<div id="error_message">
+  {{request.args.get('error')}}
+</div>
+
+{%endif%}  
 </div>
 
 <div class='col-6'>

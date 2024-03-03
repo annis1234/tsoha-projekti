@@ -44,7 +44,6 @@ body {
     background: white;
     opacity: 0.8;
     border-radius: .5em;
-    padding: 10px;
 }
 
 #loginForm input[type="submit"] {

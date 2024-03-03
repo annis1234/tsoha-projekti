@@ -18,19 +18,22 @@ def create_user(username, password):
 
 def login(username, password):
     
-    sql = text("SELECT id, password FROM users WHERE username =:username")
-    result = db.session.execute(sql, {"username": username})
-    user = result.fetchone()
+    try:
+        sql = text("SELECT id, password FROM users WHERE username =:username")
+        result = db.session.execute(sql, {"username": username})
+        user = result.fetchone()
 
-    if not user:
-        return False
-    else:
-        if check_password_hash(user.password, password):
-            session["username"] = username
-            session["user_id"] = user.id
-            return True
-        else:
+        if not user or not username or not password:
             return False
+        else:
+            if check_password_hash(user.password, password):
+                session["username"] = username
+                session["user_id"] = user.id
+                return True
+            else:
+                return False
+    except:
+        return False
     
 def get_user():
     return session.get("user_id", 0)
