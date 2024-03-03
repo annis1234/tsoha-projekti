@@ -116,8 +116,20 @@ body {
 }
 
 #point:hover{
-
     opacity: 0.2;
     text-decoration: none
+}
 
+#zoom {
+
+    border: none;
+    background: transparent;
+    opacity: 0.8;
+    border-radius: .5em;
+    padding: 5px;
+    margin-left: 2em;
+}
+
+#zoom:hover {
+    opacity:0.2;
 }
