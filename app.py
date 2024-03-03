@@ -1,5 +1,4 @@
-from flask import Flask,render_template, request, jsonify, session, redirect
-from sqlalchemy.sql import text
+from flask import Flask
 from os import getenv
 
 app = Flask(__name__)

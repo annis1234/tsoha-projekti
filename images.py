@@ -1,7 +1,6 @@
 from db import db
 from flask import make_response
 from sqlalchemy.sql import text
-import points
 
 def get_image(id):
     sql = text("SELECT data FROM images WHERE point_id=:point_id")

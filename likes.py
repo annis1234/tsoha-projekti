@@ -1,5 +1,4 @@
 from db import db
-from flask import request, session
 from sqlalchemy.sql import text
 import users, points
 

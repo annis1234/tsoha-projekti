@@ -125,5 +125,4 @@ def send():
         
     except Exception as e:
         return render_template("error_point.html", message="Kuvan lisäys epäonnistui", id = id)
-
         

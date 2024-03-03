@@ -13,8 +13,6 @@
         </li>
       </ul>
     </nav>
-  
-
 
 {%for p in point%}
 
@@ -59,7 +57,7 @@
 {{new}}
 </div>
  
-<form action="/send_message" method="POST" onsubmit = "return check(this)">
+<form action="/send_message" method="POST">
     <p>Kirjoita kommentti:</p>
     <textarea name="message"></textarea>
     <br>
