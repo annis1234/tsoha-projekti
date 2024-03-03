@@ -22,8 +22,10 @@ def create_point():
     title = data.get("title")
     description = data.get("description")
 
-    sql = text("INSERT INTO points (latitude, longitude, title, description) VALUES (:latitude, :longitude, :title, :description) RETURNING id")
-    result = db.session.execute(sql, {"latitude": latitude, "longitude": longitude, "title": title, "description": description})
+    creator = session.get('user_id')
+
+    sql = text("INSERT INTO points (latitude, longitude, title, description, user_id) VALUES (:latitude, :longitude, :title, :description, :user_id) RETURNING id")
+    result = db.session.execute(sql, {"latitude": latitude, "longitude": longitude, "title": title, "description": description, "user_id": creator})
     db.session.commit()
 
     return result.fetchone()[0]
@@ -55,3 +57,8 @@ def get_coordinates(id):
     sql = text ("SELECT latitude, longitude FROM points WHERE id =:id")
     result = db.session.execute(sql, {"id": id})
     return result.fetchall()
+
+def get_creator(point_id):
+    sql = text("SELECT username FROM users LEFT JOIN points ON points.user_id = users.id WHERE points.id=:id")
+    result = db.session.execute(sql, {"id": point_id})
+    return result.fetchone()[0]

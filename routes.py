@@ -20,8 +20,11 @@ def point(id):
     point = points.get_one(id)
     msg = messages.get_messages()
     like_count=likes.get_likes()
+    creator = points.get_creator(id)
 
-    return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count)
+    print(creator)
+
+    return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count, creator = creator)
 
 @app.route("/get_image/<int:id>")
 def get_image(id):

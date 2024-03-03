@@ -58,7 +58,7 @@
 {%endfor%}
 {{new}}
 </div>
-
+ 
 <form action="/send_message" method="POST">
     <p>Kirjoita kommentti:</p>
     <textarea name="message"></textarea>
@@ -68,6 +68,7 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
+{%if session.username == creator%}
 <button id="delete">Poista kohde</button>
 
 <script type = "module">
@@ -87,3 +88,5 @@
     delete_button.addEventListener("click", delete_point)
 
 </script>
+
+{%endif%}

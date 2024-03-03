@@ -1,15 +1,16 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE, 
+    password TEXT);
+
 CREATE TABLE points (
     id SERIAL PRIMARY KEY,
     latitude FLOAT,
     longitude FLOAT,
     title TEXT NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    user_id INTEGER REFERENCES users
     );
-
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username TEXT UNIQUE, 
-    password TEXT);
 
 CREATE TABLE  messages(
     id SERIAL PRIMARY KEY,
