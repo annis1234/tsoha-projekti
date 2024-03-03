@@ -15,13 +15,28 @@
 </div>
 
 <div id="loginForm" class='form'>
-    <form action="/create_user" method="POST">
+    <form action="/create_user" method="POST" onsubmit="return check(this)">
         Tunnus: <br>
         <input type="username" name="username"><br>
         Salasana:<br>
         <input type="password" name="password"><br>
         <input type="submit" value="Luo uusi käyttäjä">
     </form>
+
+<script>
+  function check(form) {
+      if (form.username.value.length < 3) {
+          alert("Käyttäjätunnuksen on oltava vähintää 3 merkkiä pitkä");
+          return false;
+      }
+      if (form.password.value.length < 7) {
+          alert("Salasanan on oltava vähintään 7 merkkiä pitkä");
+          return false;
+      }
+      return true;
+  }
+  </script>
+
 </div>
 
 {%if request.args.get('error')%}

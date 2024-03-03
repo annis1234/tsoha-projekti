@@ -25,6 +25,10 @@ def login(username, password):
 
         if not user or not username or not password:
             return False
+        
+        if len(password) < 3 or len(username) < 7:
+            return False
+        
         else:
             if check_password_hash(user.password, password):
                 session["username"] = username

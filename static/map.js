@@ -51,6 +51,22 @@ function addPoint () {
     const title = document.getElementById("name").value
     const description = document.getElementById("description").value
 
+    if (title.length == 0) {
+        alert("Lisää kohteelle otsikko!")
+    }
+
+    if (title.length > 20) {
+        alert("Otsikko on liian pitkä")
+    }
+
+    if (description.length == 0) {
+        alert("Lisää kohteelle kuvaus!")
+    }
+
+    if (description.length> 5000) {
+        alert("Kuvaus on liian pitkä")
+    }
+
     fetch('/create_point', {
         method: 'POST',
         headers: {

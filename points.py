@@ -26,6 +26,9 @@ def create_point():
 
     if not title or not description:
         return False
+    
+    elif len(title) > 20 or len(description) > 5000:
+        return False
 
     sql = text("INSERT INTO points (latitude, longitude, title, description, user_id) VALUES (:latitude, :longitude, :title, :description, :user_id) RETURNING id")
     result = db.session.execute(sql, {"latitude": latitude, "longitude": longitude, "title": title, "description": description, "user_id": creator})
