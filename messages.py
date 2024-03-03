@@ -13,6 +13,10 @@ def send_message(message):
     user_id = users.get_user()
     point_id = points.get_point_id()
     content = message
+
+    if not content:
+        return False
+    
     sql = text("INSERT INTO messages (content, user_id, point_id, sent_at) VALUES (:content, :user_id, :point_id, NOW())")
     result = db.session.execute(sql, {"content": content, "user_id": user_id, "point_id" : point_id})
     db.session.commit()

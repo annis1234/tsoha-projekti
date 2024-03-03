@@ -1,0 +1,23 @@
+body {
+
+    margin: auto;
+    max-width: 45em;
+    font-family: 'Didot', sans-serif;
+    background: rgb(248, 248, 253);
+}
+
+.navbar-item {
+    float: 'right';
+    font-size: 15px;
+}
+
+#error {
+    border-radius: .5em;
+    max-width: 15em;
+    display: grid;
+    grid-row-gap: .3em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    padding: 10px 20px;
+    float:left
+}

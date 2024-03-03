@@ -22,8 +22,6 @@ def point(id):
     like_count=likes.get_likes()
     creator = points.get_creator(id)
 
-    print(creator)
-
     return render_template("point.html", id = id, point=point, msg=msg, like_count=like_count, creator = creator)
 
 @app.route("/get_image/<int:id>")
@@ -33,15 +31,16 @@ def get_image(id):
         return img
 
     except Exception as e:
-        return {"message":  str(e)}
+        return render_template("error_point.html", message=e, id = id)
 
 @app.route("/create_point", methods=["POST"])
 def add():
-    try:
-        point_id = points.create_point()
+    point_id = points.create_point()
+    if point_id:
         return jsonify({"id": point_id})
-    except Exception as e:
-        return render_template("error.html", message=e)
+    
+    else:
+        return render_template("error.html", message="Pisteen lisäys epäonnistui")
     
 @app.route("/new_user")
 def new_user():
@@ -77,7 +76,6 @@ def logout():
 @app.route("/send_message", methods=["POST"])
 def send_message():
 
-    try:
         message = request.form['message']
 
         if session["csrf_token"] != request.form["csrf_token"]:
@@ -87,8 +85,8 @@ def send_message():
         if messages.send_message(message):
             return redirect("/point/{}".format(id))
         
-    except Exception as e:
-        return {"message": str(e)}
+        else:
+            return render_template("error_point.html", message="Et voi lähettää viestiä tyhjänä!", id = id)
     
 @app.route("/delete_point", methods=["DELETE"])
 def delete_point():
@@ -97,7 +95,7 @@ def delete_point():
         points.delete_point(id)
         return jsonify({"message": "point deleted"})
     except Exception as e:
-        return {"message":  str(e)}
+        return render_template("error_point.html", message="Pisteen poistaminen epäonnistui", id = id)
     
 @app.route("/like", methods = {"POST"})
 def like():
@@ -105,10 +103,8 @@ def like():
     l = likes.get_likes()
     try:
         likes.like()
-        print(l)
         return redirect("/point/{}".format(id))
     except Exception as e:
-        print(e)
         return redirect("/point/{}".format(id))
     
 
@@ -128,6 +124,6 @@ def send():
             return redirect("/point/{}".format(id))
         
     except Exception as e:
-        return {"message": str(e)}
+        return render_template("error_point.html", message="Kuvan lisäys epäonnistui", id = id)
 
         

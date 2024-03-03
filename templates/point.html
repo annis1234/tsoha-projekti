@@ -59,7 +59,7 @@
 {{new}}
 </div>
  
-<form action="/send_message" method="POST">
+<form action="/send_message" method="POST" onsubmit = "return check(this)">
     <p>Kirjoita kommentti:</p>
     <textarea name="message"></textarea>
     <br>
@@ -67,6 +67,14 @@
     <input type="submit" value="Lähetä">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+
+{%if request.args.get('error')%}
+
+<div id="error_message">
+{{request.args.get('error')}}
+</div>
+
+{%endif%}
 
 {%if session.username == creator%}
 <button id="delete">Poista kohde</button>

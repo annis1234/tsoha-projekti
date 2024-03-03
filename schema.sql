@@ -7,7 +7,7 @@ CREATE TABLE points (
     id SERIAL PRIMARY KEY,
     latitude FLOAT,
     longitude FLOAT,
-    title TEXT NOT NULL,
+    title TEXT NOT NULL UNIQUE,
     description TEXT NOT NULL,
     user_id INTEGER REFERENCES users
     );
