@@ -23,12 +23,9 @@ def login(username, password):
         result = db.session.execute(sql, {"username": username})
         user = result.fetchone()
 
-        if not user or not username or not password:
+        if not user:
             return False
-        
-        if len(password) < 3 or len(username) < 7:
-            return False
-        
+    
         else:
             if check_password_hash(user.password, password):
                 session["username"] = username
