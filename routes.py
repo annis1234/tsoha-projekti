@@ -86,7 +86,7 @@ def send_message():
             return redirect("/point/{}".format(id))
         
         else:
-            return render_template("error_point.html", message="Et voi lähettää viestiä tyhjänä!", id = id)
+            return render_template("error_point.html", message="Et voi lähettää viestiä ilman sisältöä!", id = id)
     
 @app.route("/delete_point", methods=["DELETE"])
 def delete_point():

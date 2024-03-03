@@ -1,13 +1,17 @@
 # Instagrammable Helsinki
 
+# Loppupalautus 3.3.
 
 Sovellus on karttasovellus, joka näyttää Helsingin parhaimmat Instagram-kuvauslokaatiot. Sisäänkirjautumisen jälkeen
-sovelluksen etusivulla on karttanäkymä, joka näyttää sovellukseen lisätyt kohteet pisteinä. Karttaa napauttamalla käyttäjä voi
-lisätä sovellukseen uuden kohteen. Jokaisella kohteella on nimi ja lyhyt tekstimuotoinen kuvaus. Kohteille on myös mahdollista
-antaa tykkäyksiä ja kommentteja. Kohdetta klikkaamalla käyttäjälle avautuu näkymä kohteen tiedoista sekä sen saamista
+sovelluksen etusivulla on karttanäkymä, joka näyttää sovellukseen lisätyt kohteet pisteinä. Lisäksi etusivulla näkyy
+lisättyjen kohteiden lukumäärä sekä viisi tykätyintä kohdetta. Käyttäjän on mahdollista zoomata karttanäkymä
+suosituimpiin kohteisiin ja avata niiden kohdetiedot etusivun linkkien kautta.
+
+Karttaa napauttamalla käyttäjä voi lisätä sovellukseen uuden kohteen. Jokaisella kohteella on nimi ja tekstimuotoinen kuvaus.
+Kohteille on myös mahdollista antaa tykkäyksiä ja kommentteja. Kohdetta klikkaamalla käyttäjälle avautuu näkymä kohteen tiedoista sekä sen saamista
 tykkäyksistä ja kommenteista.
 
-Ylläpito-oikeudet omaava käyttäjä voi poistaa luotuja kohteita.
+Käyttäjä voi poistaa tietokannasta ne kohteet, jotka hän on itse sinne lisännyt.
 
 # Välipalautus 18.2.
 
